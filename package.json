@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start:api": "tsc -p server/tsconfig.json && node dist/server/main.js"
+    "start:api": "tsc -p server/tsconfig.json && node dist/server/main.js",
+    "preview:cloudflare": "npm run build && wrangler dev",
+    "deploy:cloudflare": "npm run build && wrangler deploy"
   },
   "private": true,
   "packageManager": "npm@11.13.0",
@@ -34,6 +36,7 @@
     "jsdom": "^31.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "wrangler": "^4.168.0"
   }
 }

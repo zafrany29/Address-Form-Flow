@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { environment } from '../environments/environment';
 export interface City {
   id: number;
   name: string;
@@ -11,7 +12,7 @@ export interface Address {
 @Injectable({ providedIn: 'root' })
 export class AddressService {
   private readonly http = inject(HttpClient);
-  private readonly api = 'http://localhost:3000';
+  private readonly api = environment.apiUrl;
   draft: Address | null = null;
 
   getCities() {
