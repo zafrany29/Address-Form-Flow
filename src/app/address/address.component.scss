@@ -1,0 +1,19 @@
+@use '../shared/flow';
+
+.form__field,
+.form__select {
+  width: 100%;
+}
+
+.form__field {
+  margin-bottom: 12px;
+}
+
+.form__required {
+  color: #8c98aa;
+  font-size: 12px;
+}
+
+.form__required span {
+  color: #df1733;
+}

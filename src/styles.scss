@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: mat.$blue-palette,
+      typography: Arial,
+      density: 0,
+    )
+  );
+  @include mat.theme-overrides(
+    (
+      primary: #203f98,
+      on-primary: #fff,
+    )
+  );
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #f5f7fb;
+  color: #1d2d4b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+p {
+  margin: 0;
+  color: #71809a;
+  line-height: 1.5;
+}

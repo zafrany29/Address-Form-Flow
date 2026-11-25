@@ -1,0 +1,64 @@
+<div class="flow">
+  <div class="flow__eyebrow"><span></span> YOUR DETAILS</div>
+  <div class="flow__heading">
+    <div>
+      <h1>Let's get started.</h1>
+      <p>Tell us a little about yourself to continue.</p>
+    </div>
+    <div class="flow__step">STEP <strong>01</strong> / 02</div>
+  </div>
+  <div class="flow__progress" aria-label="Step 1 of 2"><span></span><span></span></div>
+  <section class="flow__card">
+    <div class="flow__card-heading">
+      <div class="flow__icon" aria-hidden="true">&#8962;</div>
+      <div>
+        <h2>Address details</h2>
+        <p>Enter your name and select your city below.</p>
+      </div>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="next()" novalidate>
+      <mat-form-field class="form__field" appearance="outline">
+        <mat-label>User name</mat-label>
+        <input
+          matInput
+          id="username"
+          formControlName="username"
+          placeholder="Enter your name"
+          autocomplete="name"
+          required
+        />
+        <mat-error>Please enter your name.</mat-error>
+      </mat-form-field>
+      <div class="form__field">
+        <mat-form-field class="form__select" appearance="outline">
+          <mat-label>City</mat-label>
+          <select matNativeControl id="city" formControlName="city" required>
+            <option value="">{{ loading() ? 'Loading cities...' : 'Select your city' }}</option>
+            @for (city of cities(); track city.id) {
+              <option [value]="city.name">{{ city.name }}</option>
+            }
+          </select>
+          <mat-error>Please select a city.</mat-error>
+        </mat-form-field>
+        @if (loadError()) {
+          <div class="flow__error" role="alert">
+            Couldn't load cities. Make sure the API is running.
+            <button mat-button type="button" (click)="loadCities()">Try again</button>
+          </div>
+        }
+      </div>
+      <div class="flow__actions">
+        <span class="form__required"><span>*</span> Required fields</span
+        ><button
+          mat-flat-button
+          class="flow__button"
+          type="submit"
+          [disabled]="loading() || loadError()"
+        >
+          Continue <span aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
+    </form>
+  </section>
+  <p class="flow__caption">Review and send your details</p>
+</div>

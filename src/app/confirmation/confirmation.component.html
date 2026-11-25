@@ -1,0 +1,51 @@
+@if (address; as details) {
+  <div class="flow">
+    <div class="flow__eyebrow"><span></span> YOUR DETAILS</div>
+    <div class="flow__heading">
+      <div>
+        <h1>Everything look right?</h1>
+        <p>Take a moment to review your details.</p>
+      </div>
+      <div class="flow__step">STEP <strong>02</strong> / 02</div>
+    </div>
+    <div class="flow__progress flow__progress--complete" aria-label="Step 2 of 2">
+      <span></span><span></span>
+    </div>
+    <section class="flow__card">
+      <div class="flow__card-heading">
+        <div class="flow__icon" aria-hidden="true">&#10003;</div>
+        <div>
+          <h2>Review your details</h2>
+          <p>Make sure everything is correct before sending.</p>
+        </div>
+      </div>
+      <dl class="review">
+        <div>
+          <dt>USER NAME</dt>
+          <dd>{{ details.username }}</dd>
+        </div>
+        <div>
+          <dt>CITY</dt>
+          <dd>{{ details.city }}</dd>
+        </div>
+      </dl>
+      @if (error()) {
+        <p class="flow__error" role="alert">Your details couldn't be sent. Please try again.</p>
+      }
+      <div class="flow__actions">
+        <a mat-button class="review__back" routerLink="/"
+          ><span aria-hidden="true">&#8592;</span> &nbsp; Edit details</a
+        ><button
+          mat-flat-button
+          class="flow__button"
+          type="button"
+          (click)="send()"
+          [disabled]="sending()"
+        >
+          {{ sending() ? 'Sending...' : 'Send details' }} <span aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
+    </section>
+    <p class="flow__caption">One last look before you send</p>
+  </div>
+}

@@ -1,0 +1,27 @@
+@use '../shared/flow';
+
+.review__back {
+  color: #24469f;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 13px;
+}
+.review {
+  margin: 0;
+}
+.review div {
+  padding: 5px 0 22px;
+}
+.review dt {
+  font-size: 10px;
+  font-weight: 700;
+  color: #8794aa;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+.review dd {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
