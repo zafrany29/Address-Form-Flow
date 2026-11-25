@@ -53,7 +53,7 @@
           mat-flat-button
           class="flow__button"
           type="submit"
-          [disabled]="loading() || loadError()"
+          [disabled]="form.invalid || loading() || loadError()"
         >
           Continue <span aria-hidden="true">&#8594;</span>
         </button>

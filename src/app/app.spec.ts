@@ -16,6 +16,42 @@ describe('nonBlank', () => {
 });
 
 describe('AddressComponent', () => {
+  it('enables Continue only when both fields are valid', async () => {
+    TestBed.configureTestingModule({
+      imports: [AddressComponent],
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
+    });
+    const fixture = TestBed.createComponent(AddressComponent);
+    await fixture.whenStable();
+    const http = TestBed.inject(HttpTestingController);
+    http.expectOne('http://localhost:3000/cities').flush([{ id: 1, name: 'Jerusalem' }]);
+    await fixture.whenStable();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const button = element.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const username = element.querySelector('#username') as HTMLInputElement;
+    const city = element.querySelector('#city') as HTMLSelectElement;
+    expect(button.disabled).toBe(true);
+
+    username.value = '  ';
+    username.dispatchEvent(new Event('input', { bubbles: true }));
+    city.value = 'Jerusalem';
+    city.dispatchEvent(new Event('change', { bubbles: true }));
+    await fixture.whenStable();
+    expect(button.disabled).toBe(true);
+
+    username.value = 'John';
+    username.dispatchEvent(new Event('input', { bubbles: true }));
+    await fixture.whenStable();
+    expect(button.disabled).toBe(false);
+
+    city.value = '';
+    city.dispatchEvent(new Event('change', { bubbles: true }));
+    await fixture.whenStable();
+    expect(button.disabled).toBe(true);
+    http.verify();
+  });
+
   it('shows cities after the request completes without another user action', async () => {
     TestBed.configureTestingModule({
       imports: [AddressComponent],
